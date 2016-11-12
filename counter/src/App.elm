@@ -1,10 +1,12 @@
 module App exposing (..)
 
-import Html exposing (Html, text, div, h1, button)
+import Html exposing (Html, text, div, h1, button, a)
+import Html.Attributes exposing (href, style)
 import Html.Events exposing (onClick)
 import Material
 import Material.Scheme
 import Material.Layout as Layout
+import Material.Button as Button
 
 
 type alias Model =
@@ -18,7 +20,7 @@ init =
     ( { count = 0
       , mdl = Material.model
       }
-    , Cmd.none
+    , Material.init Mdl
     )
 
 
@@ -50,10 +52,21 @@ view model =
             , Layout.fixedDrawer
             ]
             { header = header model
-            , drawer = [ text "drawer" ]
+            , drawer = drawer model
             , tabs = ( [], [] )
             , main = [ counterView model ]
             }
+
+
+drawer : Model -> List (Html Msg)
+drawer model =
+    [ Layout.navigation
+        []
+        [ Layout.link
+            [ Layout.href "http://getmdl.io" ]
+            [ text "MDL Docs" ]
+        ]
+    ]
 
 
 header : Model -> List (Html Msg)
@@ -67,10 +80,27 @@ header model =
 
 counterView : Model -> Html Msg
 counterView model =
-    div []
-        [ button [ onClick Decrement ] [ text "-" ]
-        , text <| toString model.count
-        , button [ onClick Increment ] [ text "+" ]
+    div
+        [ style [ ( "padding", "1em" ) ] ]
+        [ Button.render Mdl
+            [ 0 ]
+            model.mdl
+            [ Button.raised
+            , Button.colored
+            , Button.onClick Decrement
+            ]
+            [ text "-" ]
+        , div
+            [ style [ ( "padding", "1em" ), ( "display", "inline-block" ) ] ]
+            [ text <| toString model.count ]
+        , Button.render Mdl
+            [ 1 ]
+            model.mdl
+            [ Button.raised
+            , Button.colored
+            , Button.onClick Increment
+            ]
+            [ text "+" ]
         ]
 
 
