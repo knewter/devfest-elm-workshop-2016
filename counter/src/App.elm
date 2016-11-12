@@ -2,6 +2,7 @@ module App exposing (..)
 
 import Html exposing (Html, text, div, h1, button)
 import Html.Events exposing (onClick)
+import Material.Scheme
 
 
 type alias Model =
@@ -30,12 +31,13 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ h1 [] [ text "DevFest Counts Things" ]
-        , button [ onClick Decrement ] [ text "-" ]
-        , text <| toString model
-        , button [ onClick Increment ] [ text "+" ]
-        ]
+    Material.Scheme.top <|
+        div []
+            [ h1 [] [ text "DevFest Counts Things" ]
+            , button [ onClick Decrement ] [ text "-" ]
+            , text <| toString model
+            , button [ onClick Increment ] [ text "+" ]
+            ]
 
 
 subscriptions : Model -> Sub Msg
