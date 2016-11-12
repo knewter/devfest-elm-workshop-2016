@@ -3,30 +3,41 @@ module App exposing (..)
 import Html exposing (Html, text, div, h1, button)
 import Html.Events exposing (onClick)
 import Material.Scheme
+import Material
 
 
 type alias Model =
-    Int
+    { count : Int
+    , mdl : Material.Model
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( 0, Cmd.none )
+    ( { count = 0
+      , mdl = Material.model
+      }
+    , Cmd.none
+    )
 
 
 type Msg
     = Increment
     | Decrement
+    | Mdl (Material.Msg Msg)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Increment ->
-            ( model + 1, Cmd.none )
+            ( { model | count = model.count + 1 }, Cmd.none )
 
         Decrement ->
-            ( model - 1, Cmd.none )
+            ( { model | count = model.count - 1 }, Cmd.none )
+
+        Mdl mdlMsg ->
+            Material.update mdlMsg model
 
 
 view : Model -> Html Msg
@@ -35,7 +46,7 @@ view model =
         div []
             [ h1 [] [ text "DevFest Counts Things" ]
             , button [ onClick Decrement ] [ text "-" ]
-            , text <| toString model
+            , text <| toString model.count
             , button [ onClick Increment ] [ text "+" ]
             ]
 
