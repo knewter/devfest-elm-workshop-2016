@@ -31,6 +31,19 @@ following set up ahead of time.
 - If you really want to be prepared, you could check out [my video on building
   your first Elm HTML Application](https://www.dailydrip.com/topics/elm/drips/our-first-html-application).
 
+## Projects
+
+There are a few projects in this workshop as we move along.
+
+### Counter
+
+The first is a counter, located in the `counter` directory.  We generated it
+with:
+
+```sh
+create-elm-app counter
+```
+
 ## Resources
 
 - [create-elm-app](https://github.com/halfzebra/create-elm-app)
