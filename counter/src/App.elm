@@ -49,18 +49,26 @@ view model =
             [ Layout.fixedHeader
             , Layout.fixedDrawer
             ]
-            { header = [ text "header" ]
+            { header = header model
             , drawer = [ text "drawer" ]
             , tabs = ( [], [] )
             , main = [ counterView model ]
             }
 
 
+header : Model -> List (Html Msg)
+header model =
+    [ Layout.row
+        []
+        [ Layout.title [] [ text "DevFest Counts Things" ]
+        ]
+    ]
+
+
 counterView : Model -> Html Msg
 counterView model =
     div []
-        [ h1 [] [ text "DevFest Counts Things" ]
-        , button [ onClick Decrement ] [ text "-" ]
+        [ button [ onClick Decrement ] [ text "-" ]
         , text <| toString model.count
         , button [ onClick Increment ] [ text "+" ]
         ]
@@ -68,4 +76,4 @@ counterView model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Material.subscriptions Mdl model
