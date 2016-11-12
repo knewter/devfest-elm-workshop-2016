@@ -1,30 +1,41 @@
 module App exposing (..)
 
-import Html exposing (Html, text, div, h1)
+import Html exposing (Html, text, div, h1, button)
+import Html.Events exposing (onClick)
 
 
 type alias Model =
-    { message : String
-    }
+    Int
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { message = "Your Elm App is working!" }, Cmd.none )
+    ( 0, Cmd.none )
 
 
 type Msg
-    = NoOp
+    = Increment
+    | Decrement
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        Increment ->
+            ( model + 1, Cmd.none )
+
+        Decrement ->
+            ( model - 1, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
-    h1 [] [ text model.message ]
+    div []
+        [ h1 [] [ text "DevFest Counts Things" ]
+        , button [ onClick Decrement ] [ text "-" ]
+        , text <| toString model
+        , button [ onClick Increment ] [ text "+" ]
+        ]
 
 
 subscriptions : Model -> Sub Msg
