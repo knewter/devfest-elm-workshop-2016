@@ -26,10 +26,14 @@ following set up ahead of time.
     replacement, normal-looking file structures, and not much else.  It's a good
     tool.  I don't tend to use it on my own apps but that's because I'm a weirdo
     that likes overwhelming amounts of control.
-- You could also have a look at [my video that walks you through installation and
-  some basics in the REPL](https://www.dailydrip.com/topics/elm/drips/introduction-and-installing).
-- If you really want to be prepared, you could check out [my video on building
-  your first Elm HTML Application](https://www.dailydrip.com/topics/elm/drips/our-first-html-application).
+- Additional Optional Steps:
+  - [Install elm-format](https://github.com/avh4/elm-format)
+    - This is like `gofmt` - an opinionated formatter for elm code.  You should
+      use it.  Even if you hate its choices at first.
+  - You could also have a look at [my video that walks you through installation and
+    some basics in the REPL](https://www.dailydrip.com/topics/elm/drips/introduction-and-installing).
+  - If you really want to be prepared, you could check out [my video on building
+    your first Elm HTML Application](https://www.dailydrip.com/topics/elm/drips/our-first-html-application).
 
 ## Projects
 
