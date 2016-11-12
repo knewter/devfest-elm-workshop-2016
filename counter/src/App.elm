@@ -2,8 +2,9 @@ module App exposing (..)
 
 import Html exposing (Html, text, div, h1, button)
 import Html.Events exposing (onClick)
-import Material.Scheme
 import Material
+import Material.Scheme
+import Material.Layout as Layout
 
 
 type alias Model =
@@ -43,12 +44,26 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Material.Scheme.top <|
-        div []
-            [ h1 [] [ text "DevFest Counts Things" ]
-            , button [ onClick Decrement ] [ text "-" ]
-            , text <| toString model.count
-            , button [ onClick Increment ] [ text "+" ]
+        Layout.render Mdl
+            model.mdl
+            [ Layout.fixedHeader
+            , Layout.fixedDrawer
             ]
+            { header = [ text "header" ]
+            , drawer = [ text "drawer" ]
+            , tabs = ( [], [] )
+            , main = [ counterView model ]
+            }
+
+
+counterView : Model -> Html Msg
+counterView model =
+    div []
+        [ h1 [] [ text "DevFest Counts Things" ]
+        , button [ onClick Decrement ] [ text "-" ]
+        , text <| toString model.count
+        , button [ onClick Increment ] [ text "+" ]
+        ]
 
 
 subscriptions : Model -> Sub Msg
